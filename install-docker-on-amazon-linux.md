@@ -1,4 +1,3 @@
-
 ## Docker CE Install
 
 ```sh
