@@ -119,6 +119,8 @@ services:
     volumes:
       - icinga2:/data
       - ./icinga2.conf.d:/custom_data/custom.conf.d
+      - ./ilert-icinga.py:/usr/local/bin/ilert-icinga.py
+      - plugin:/tmp/ilert-icinga
 
   icingadb:
     environment:
@@ -168,7 +170,21 @@ services:
       - mysql:/var/lib/mysql
       - ./env/mysql/:/docker-entrypoint-initdb.d/
 
+  cron:
+    build:
+      dockerfile: cron.Dockerfile
+      context: .
+    container_name: cron
+    restart: always
+    environment:
+      - CRON_STRINGS=* * * * * root /usr/local/bin/ilert-icinga.py --mode send --endpoint https://api.ilert.com
+      - DOCKER_MODE=true
+    volumes:
+      - ./ilert-icinga.py:/usr/local/bin/ilert-icinga.py
+      - plugin:/tmp/ilert-icinga
+
 volumes:
   icinga2:
   icingaweb:
   mysql:
+  plugin:
