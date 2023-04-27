@@ -13,5 +13,5 @@ if [ ! -f /data/etc/icinga2/features-enabled/icingadb.conf ]; then
 fi
 
 if [ ! -f /custom_data/custom.conf.d/ilert-icinga.conf ]; then
-  cat /custom_data/custom.conf.d/ilert-icinga.conf >>/data/etc/icinga2/conf.d/ilert-icinga.conf
+  cat /custom_data/custom.conf.d/ilert-icinga.conf >/data/etc/icinga2/conf.d/ilert-icinga.conf
 fi
