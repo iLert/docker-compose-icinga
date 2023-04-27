@@ -11,3 +11,7 @@ if [ ! -f /data/etc/icinga2/features-enabled/icingadb.conf ]; then
   mkdir -p /data/etc/icinga2/features-enabled
   cat /config/icingadb.conf >/data/etc/icinga2/features-enabled/icingadb.conf
 fi
+
+if [ ! -f /custom_data/custom.conf.d/ilert-icinga.conf ]; then
+  cat /custom_data/custom.conf.d/ilert-icinga.conf >>/data/etc/icinga2/conf.d/ilert-icinga.conf
+fi
